@@ -36,3 +36,18 @@ xcodebuild -project recipeApp.xcodeproj -scheme recipeApp -configuration Debug -
 
 ## Notes
 - The project uses SwiftData `@Model`, `@Query`, and `@Bindable`. See `ContentView.swift` for examples.
+
+## Adding SwiftSoup (needed for URL import)
+
+To enable the import-by-URL feature, add the `SwiftSoup` package to the Xcode project:
+
+- In Xcode: File ▶ Add Packages... then search for `SwiftSoup` (https://github.com/scinfu/SwiftSoup) and add the latest release.
+- Or via command line using Swift Package Manager for an Xcode project that uses SPM dependencies:
+
+```bash
+# In the project directory (optional):
+open recipeApp.xcodeproj
+# Then use Xcode UI to add: https://github.com/scinfu/SwiftSoup
+```
+
+After adding the package, import `SwiftSoup` in `AddRecipeByURLView.swift` is already included.

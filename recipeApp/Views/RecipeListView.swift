@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 // MARK: - Recipe List View
 // Root view presenting a searchable list of recipes.
@@ -11,6 +11,7 @@ struct RecipeListView: View {
 
   @State private var searchText = ""
   @State private var showingAddRecipe = false
+  @State private var showingImportByURL = false
 
   var filteredRecipes: [Recipe] {
     if searchText.isEmpty {
@@ -36,7 +37,10 @@ struct RecipeListView: View {
       .navigationTitle("My Recipes")
       .searchable(text: $searchText, prompt: "Search recipes")
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItemGroup(placement: .navigationBarTrailing) {
+          Button(action: { showingImportByURL = true }) {
+            Image(systemName: "link")
+          }
           Button(action: { showingAddRecipe = true }) {
             Image(systemName: "plus")
           }
@@ -44,6 +48,9 @@ struct RecipeListView: View {
       }
       .sheet(isPresented: $showingAddRecipe) {
         AddRecipeView()
+      }
+      .sheet(isPresented: $showingImportByURL) {
+        AddRecipeByURLView()
       }
       .overlay {
         if recipes.isEmpty {
