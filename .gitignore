@@ -1,0 +1,54 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserdatad
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+*.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+
+# Build products & indexes
+build/
+DerivedData/
+*.ipa
+*.app
+
+# Swift Package Manager
+.build/
+Packages/
+.swiftpm/
+Package.resolved
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/*
+fastlane/test_output/
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Signing & credentials
+*.mobileprovision
+*.cer
+*.p12
+.env
+*.keystore
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Misc
+*.lock
+*.log
