@@ -5,6 +5,14 @@ import SwiftUI
 struct RecipeDetailView: View {
   @Bindable var recipe: Recipe
   @State private var showingEditSheet = false
+  @State private var selectedTab: Tab = .ingredients
+  @State private var completedIngredients: Set<String> = []
+  @State private var selectedInstruction: Int? = nil
+
+  enum Tab {
+    case ingredients
+    case instructions
+  }
 
   var body: some View {
     ScrollView {
@@ -45,46 +53,66 @@ struct RecipeDetailView: View {
 
         Divider()
 
-        VStack(alignment: .leading, spacing: 12) {
-          Text("Ingredients")
-            .font(.title2)
-            .bold()
-
-          ForEach(recipe.ingredients, id: \.self) { ingredient in
-            HStack {
-              Image(systemName: "circle.fill")
-                .font(.system(size: 6))
-                .foregroundColor(.blue)
-              Text(ingredient)
-            }
-          }
+        Picker("", selection: $selectedTab) {
+          Text("Ingredients").tag(Tab.ingredients)
+          Text("Instructions").tag(Tab.instructions)
         }
+        .pickerStyle(.segmented)
         .padding(.horizontal)
 
-        Divider()
-
-        VStack(alignment: .leading, spacing: 12) {
-          Text("Instructions")
-            .font(.title2)
-            .bold()
-
-          ForEach(Array(recipe.instructions.enumerated()), id: \.offset) { index, instruction in
-            HStack(alignment: .top, spacing: 12) {
-              Text("\(index + 1)")
-                .font(.headline)
-                .foregroundColor(.white)
-                .frame(width: 28, height: 28)
-                .background(Color.blue)
-                .clipShape(Circle())
-
-              Text(instruction)
-                .fixedSize(horizontal: false, vertical: true)
+        if selectedTab == .ingredients {
+          VStack(alignment: .leading, spacing: 12) {
+            ForEach(recipe.ingredients, id: \.self) { ingredient in
+              HStack {
+                Image(systemName: "circle.fill")
+                  .font(.system(size: 6))
+                  .foregroundColor(.blue)
+                Text(ingredient)
+                  .strikethrough(completedIngredients.contains(ingredient))
+                  .foregroundColor(
+                    completedIngredients.contains(ingredient) ? .secondary : .primary)
+              }
+              .contentShape(Rectangle())
+              .onTapGesture {
+                if completedIngredients.contains(ingredient) {
+                  completedIngredients.remove(ingredient)
+                } else {
+                  completedIngredients.insert(ingredient)
+                }
+              }
             }
           }
+          .padding(.horizontal)
+        } else {
+          VStack(alignment: .leading, spacing: 12) {
+            ForEach(Array(recipe.instructions.enumerated()), id: \.offset) { index, instruction in
+              HStack(alignment: .top, spacing: 12) {
+                Text("\(index + 1)")
+                  .font(.headline)
+                  .foregroundColor(.white)
+                  .frame(width: 28, height: 28)
+                  .background(Color.blue)
+                  .clipShape(Circle())
+
+                Text(instruction)
+                  .fixedSize(horizontal: false, vertical: true)
+              }
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .padding(12)
+              .background(selectedInstruction == index ? Color.blue.opacity(0.2) : Color.clear)
+              .cornerRadius(8)
+              .contentShape(Rectangle())
+              .onTapGesture {
+                selectedInstruction = selectedInstruction == index ? nil : index
+              }
+            }
+          }
+          .padding(.horizontal)
         }
-        .padding(.horizontal)
-        .padding(.bottom, 20)
+
+        Spacer()
       }
+      .padding(.bottom, 20)
     }
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
