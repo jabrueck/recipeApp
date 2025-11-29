@@ -12,53 +12,118 @@ struct RecipeListView: View {
   @State private var searchText = ""
   @State private var showingAddRecipe = false
   @State private var showingImportByURL = false
+  @State private var selectedLetter: String? = nil
+  @State private var isEditingList = false
+  @State private var isEditingTitle = false
+  @State private var listTitle = "My Recipes"
+
+  let alphabet = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) })
+
+  var availableLetters: Set<String> {
+    Set(
+      recipes.compactMap { recipe in
+        recipe.name.uppercased().first.map { String($0) }
+      })
+  }
 
   var filteredRecipes: [Recipe] {
-    if searchText.isEmpty {
-      return recipes
-    } else {
-      return recipes.filter { recipe in
+    var filtered = recipes
+
+    if let letter = selectedLetter {
+      filtered = filtered.filter { recipe in
+        recipe.name.uppercased().first == Character(letter)
+      }
+    }
+
+    if !searchText.isEmpty {
+      filtered = filtered.filter { recipe in
         recipe.name.localizedCaseInsensitiveContains(searchText)
           || recipe.cuisine.localizedCaseInsensitiveContains(searchText)
       }
     }
+
+    return filtered.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
   }
 
   var body: some View {
     NavigationView {
-      List {
-        ForEach(filteredRecipes) { recipe in
-          NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
-            RecipeRowView(recipe: recipe)
+      ZStack(alignment: .trailing) {
+        List {
+          ForEach(filteredRecipes) { recipe in
+            NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
+              RecipeRowView(recipe: recipe)
+            }
+          }
+          .onDelete(perform: deleteRecipes)
+        }
+        .navigationTitle(isEditingTitle ? "" : listTitle)
+        .searchable(text: $searchText, prompt: "Search recipes")
+        .toolbar {
+          ToolbarItemGroup(placement: .navigationBarTrailing) {
+            if isEditingTitle {
+              Button("Done") {
+                isEditingTitle = false
+              }
+            } else if isEditingList {
+              Button("Done") {
+                isEditingList = false
+              }
+            } else {
+              Button("Edit") {
+                isEditingList = true
+              }
+            }
+            Button(action: { showingImportByURL = true }) {
+              Image(systemName: "link")
+            }
+            Button(action: { showingAddRecipe = true }) {
+              Image(systemName: "plus")
+            }
+          }
+
+          ToolbarItem(placement: .principal) {
+            if isEditingTitle {
+              TextField("List Title", text: $listTitle)
+                .textFieldStyle(.roundedBorder)
+                .frame(maxWidth: 200)
+            }
           }
         }
-        .onDelete(perform: deleteRecipes)
-      }
-      .navigationTitle("My Recipes")
-      .searchable(text: $searchText, prompt: "Search recipes")
-      .toolbar {
-        ToolbarItemGroup(placement: .navigationBarTrailing) {
-          Button(action: { showingImportByURL = true }) {
-            Image(systemName: "link")
-          }
-          Button(action: { showingAddRecipe = true }) {
-            Image(systemName: "plus")
+        .environment(\.editMode, isEditingList ? .constant(.active) : .constant(.inactive))
+        .sheet(isPresented: $showingAddRecipe) {
+          AddRecipeView()
+        }
+        .sheet(isPresented: $showingImportByURL) {
+          AddRecipeByURLView()
+        }
+        .overlay {
+          if recipes.isEmpty {
+            ContentUnavailableView(
+              "No Recipes Yet",
+              systemImage: "fork.knife",
+              description: Text("Tap + to add your first recipe")
+            )
           }
         }
-      }
-      .sheet(isPresented: $showingAddRecipe) {
-        AddRecipeView()
-      }
-      .sheet(isPresented: $showingImportByURL) {
-        AddRecipeByURLView()
-      }
-      .overlay {
-        if recipes.isEmpty {
-          ContentUnavailableView(
-            "No Recipes Yet",
-            systemImage: "fork.knife",
-            description: Text("Tap + to add your first recipe")
-          )
+
+        // Alphabet Index on the right - only show letters with recipes
+        if !isEditingList && !isEditingTitle {
+          VStack(spacing: 2) {
+            ForEach(alphabet, id: \.self) { letter in
+              if availableLetters.contains(letter) {
+                Text(letter)
+                  .font(.system(size: 10, weight: .semibold))
+                  .foregroundColor(selectedLetter == letter ? .blue : .gray)
+                  .frame(width: 20, height: 16)
+                  .contentShape(Rectangle())
+                  .onTapGesture {
+                    selectedLetter = selectedLetter == letter ? nil : letter
+                  }
+              }
+            }
+          }
+          .padding(.trailing, 8)
+          .padding(.vertical, 8)
         }
       }
     }
