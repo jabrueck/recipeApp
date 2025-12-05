@@ -8,7 +8,7 @@ struct RecipeRowView: View {
   var body: some View {
     HStack(spacing: 12) {
       RoundedRectangle(cornerRadius: 8)
-        .fill(Color.blue.opacity(0.3))
+        .fill(Color.red.opacity(0.3))
         .frame(width: 60, height: 60)
         .overlay(
           Image(systemName: "fork.knife")

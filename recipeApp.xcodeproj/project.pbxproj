@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		57DCE6792ED1013100B16FA8 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 57DCE6782ED1013100B16FA8 /* SwiftSoup */; };
-		57DCE6792ED1013100B16FA9 /* SwiftSoup in Tests Frameworks */ = {isa = PBXBuildFile; productRef = 57DCE6782ED1013100B16FA8 /* SwiftSoup */; };
+		57DCE6792ED1013100B16FA9 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 57DCE6782ED1013100B16FA8 /* SwiftSoup */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,13 +28,12 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXFileReference section */
+	/* Begin PBXFileReference section */
 		5780D5C72ECFACC800D62408 /* recipeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = recipeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5780D5D42ECFACC900D62408 /* recipeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = recipeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5780D5DE2ECFACC900D62408 /* recipeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = recipeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-/* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
+		57E1F0022ECFBCD800D62409 /* RecipeShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = RecipeShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+	/* Begin PBXFileSystemSynchronizedRootGroup section */
 		5780D5C92ECFACC800D62408 /* recipeApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = recipeApp;
@@ -50,9 +49,14 @@
 			path = recipeAppUITests;
 			sourceTree = "<group>";
 		};
-/* End PBXFileSystemSynchronizedRootGroup section */
+		57E1F0092ECFBCD800D62409 /* RecipeShareExtension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = RecipeShareExtension;
+			sourceTree = "<group>";
+		};
+	/* End PBXFileSystemSynchronizedRootGroup section */
 
-/* Begin PBXFrameworksBuildPhase section */
+	/* Begin PBXFrameworksBuildPhase section */
 		5780D5C42ECFACC800D62408 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,7 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57DCE6792ED1013100B16FA9 /* SwiftSoup in Tests Frameworks */,
+				57DCE6792ED1013100B16FA9 /* SwiftSoup in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,9 +80,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
+		57E1F0042ECFBCD800D62409 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+	/* End PBXFrameworksBuildPhase section *//* Begin PBXGroup section */
 		5780D5BE2ECFACC800D62408 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +104,7 @@
 				5780D5C72ECFACC800D62408 /* recipeApp.app */,
 				5780D5D42ECFACC900D62408 /* recipeAppTests.xctest */,
 				5780D5DE2ECFACC900D62408 /* recipeAppUITests.xctest */,
+				57E1F0022ECFBCD800D62409 /* RecipeShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,9 +182,29 @@
 			productReference = 5780D5DE2ECFACC900D62408 /* recipeAppUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
+		57E1F0012ECFBCD800D62409 /* RecipeShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 57E1F0062ECFBCD800D62409 /* Build configuration list for PBXNativeTarget "RecipeShareExtension" */;
+			buildPhases = (
+				57E1F0032ECFBCD800D62409 /* Sources */,
+				57E1F0042ECFBCD800D62409 /* Frameworks */,
+				57E1F0052ECFBCD800D62409 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				57E1F0092ECFBCD800D62409 /* RecipeShareExtension */,
+			);
+			name = RecipeShareExtension;
+			packageProductDependencies = (
+			);
+			productName = RecipeShareExtension;
+			productReference = 57E1F0022ECFBCD800D62409 /* RecipeShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+	/* End PBXNativeTarget section *//* Begin PBXProject section */
 		5780D5BF2ECFACC800D62408 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
@@ -192,6 +222,9 @@
 					5780D5DD2ECFACC900D62408 = {
 						CreatedOnToolsVersion = 26.1.1;
 						TestTargetID = 5780D5C62ECFACC800D62408;
+					};
+					57E1F0012ECFBCD800D62409 = {
+						CreatedOnToolsVersion = 26.1.1;
 					};
 				};
 			};
@@ -215,11 +248,12 @@
 				5780D5C62ECFACC800D62408 /* recipeApp */,
 				5780D5D32ECFACC900D62408 /* recipeAppTests */,
 				5780D5DD2ECFACC900D62408 /* recipeAppUITests */,
+				57E1F0012ECFBCD800D62409 /* RecipeShareExtension */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
+	/* Begin PBXResourcesBuildPhase section */
 		5780D5C52ECFACC800D62408 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -241,9 +275,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
+		57E1F0052ECFBCD800D62409 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+	/* End PBXResourcesBuildPhase section *//* Begin PBXSourcesBuildPhase section */
 		5780D5C32ECFACC800D62408 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -265,9 +304,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
+		57E1F0032ECFBCD800D62409 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+	/* End PBXSourcesBuildPhase section *//* Begin PBXTargetDependency section */
 		5780D5D62ECFACC900D62408 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5780D5C62ECFACC800D62408 /* recipeApp */;
@@ -405,10 +449,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CODE_SIGNING_REQUIRED = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleURLTypes = (
+					{
+						CFBundleURLName = "Recipe App URL Scheme";
+						CFBundleURLSchemes = (
+							recipeapp,
+						);
+					},
+				);
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -436,10 +491,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				CODE_SIGNING_REQUIRED = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleURLTypes = (
+					{
+						CFBundleURLName = "Recipe App URL Scheme";
+						CFBundleURLSchemes = (
+							recipeapp,
+						);
+					},
+				);
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -542,9 +608,49 @@
 			};
 			name = Release;
 		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
+		57E1F0072ECFBCD800D62409 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocalizedDescription = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = brew.recipeApp.ShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		57E1F0082ECFBCD800D62409 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGNING_REQUIRED = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocalizedDescription = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = brew.recipeApp.ShareExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+	/* End XCBuildConfiguration section *//* Begin XCConfigurationList section */
 		5780D5C22ECFACC800D62408 /* Build configuration list for PBXProject "recipeApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -581,9 +687,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-/* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
+		57E1F0062ECFBCD800D62409 /* Build configuration list for PBXNativeTarget "RecipeShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				57E1F0072ECFBCD800D62409 /* Debug */,
+				57E1F0082ECFBCD800D62409 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+	/* End XCConfigurationList section *//* Begin XCRemoteSwiftPackageReference section */
 		57DCE6772ED0FE7A00B16FA8 /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scinfu/SwiftSoup";

@@ -12,6 +12,7 @@ struct RecipeListView: View {
   @State private var searchText = ""
   @State private var showingAddRecipe = false
   @State private var showingImportByURL = false
+  @State private var showingImportFromShare = false
   @State private var selectedLetter: String? = nil
   @State private var isEditingList = false
   @State private var isEditingTitle = false
@@ -73,6 +74,9 @@ struct RecipeListView: View {
                 isEditingList = true
               }
             }
+            Button(action: { showingImportFromShare = true }) {
+              Image(systemName: "square.and.arrow.up")
+            }
             Button(action: { showingImportByURL = true }) {
               Image(systemName: "link")
             }
@@ -95,6 +99,9 @@ struct RecipeListView: View {
         }
         .sheet(isPresented: $showingImportByURL) {
           AddRecipeByURLView()
+        }
+        .sheet(isPresented: $showingImportFromShare) {
+          ImportFromShareView()
         }
         .overlay {
           if recipes.isEmpty {

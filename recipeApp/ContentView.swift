@@ -1,15 +1,21 @@
 import SwiftData
 import SwiftUI
 
-// Thin wrapper - forwards to the modular `RecipeListView`.
 struct ContentView: View {
+  @Binding var incomingURL: URL?
+  @Binding var showImportFromShare: Bool
+
   var body: some View {
     RecipeListView()
+      .sheet(isPresented: $showImportFromShare) {
+        if let url = incomingURL {
+          ImportFromShareViewWithURL(initialURL: url)
+        }
+      }
   }
 }
 
-// Preview with an in-memory model container for SwiftData
 #Preview {
-  ContentView()
+  ContentView(incomingURL: .constant(nil), showImportFromShare: .constant(false))
     .modelContainer(for: Recipe.self, inMemory: true)
 }
